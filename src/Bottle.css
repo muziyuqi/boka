@@ -1,0 +1,19 @@
+.bottle {
+  text-align: center;
+  margin: 10px 8px;
+  width: 55px;
+  height: 122px;
+}
+
+.bottle img {
+  width: 100%;
+}
+
+.bottle .bottle-text {
+  font-size: 13px;
+  max-width: 70px;
+  max-height: 26px;
+  overflow: hidden;
+  word-wrap: break-word;
+  line-height: 1;
+}
