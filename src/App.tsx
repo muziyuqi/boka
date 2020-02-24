@@ -35,7 +35,7 @@ function App() {
 		if (!bottlesEl.current) return
 		// Capture whole DOM node
 		window.scrollTo(0, 0)
-		html2canvas(bottlesEl.current).then(canvas => {
+		html2canvas(bottlesEl.current, { useCORS: true }).then(canvas => {
 			setPostURL(canvas.toDataURL())
 			alert('长按保存图片，无法保存请使用其他浏览器打开。')
 		})
