@@ -1,0 +1,36 @@
+name: CI/CD
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [13.x]
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Bundle package
+      run: |
+        npm install
+        npm run build
+#     - name: Upload assets to Aliyun OSS
+#       uses: manyuanrong/setup-ossutil@v1.0
+#       with:
+#         endpoint: ${{ secrets.OSS_ENDPOINT }}
+#         access-key-id: ${{ secrets.OSS_ID }}
+#         access-key-secret: ${{ secrets.OSS_KEY }}
+#     - run: ossutil cp -rf build/ oss://selfie/static
+    - name: Build and Publish docker image to Registry
+      uses: HurricanKai/Publish-Docker-Github-Action@master
+      with:
+        name: ${{ secrets.DOCKER_URL }}
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        registry: ${{ secrets.DOCKER_URL }}
+        snapshot: true
