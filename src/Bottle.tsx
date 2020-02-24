@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { isDev } from './constans'
+import React, { useState } from 'react'
+import { loadBottleImage } from './utils'
 import './Bottle.css'
 
 const availableVolumes = [0, 10, 30, 50, 70, 80, 100]
@@ -10,14 +10,6 @@ export class Bottle {
 	constructor(volume: number, text: string) {
 		this.volume = volume
 		this.text = text
-	}
-}
-
-const loadBottleImage = (volume: number) => {
-	if (isDev) {
-		return require(`./assets/images/${volume}.png`)
-	} else {
-		return ''
 	}
 }
 

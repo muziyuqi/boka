@@ -1,20 +1,24 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import BottleComponent, { Bottle } from './Bottle'
 import { InitBottleN, defaultTitle } from './constans'
 import html2canvas from 'html2canvas'
 import QRCodeImage from './assets/images/QR.png'
 import './App.css'
+import { loadKinds } from './utils'
 
 function initBottles() {
-	const bottles: Bottle[] = []
-	for (let i = 0; i < InitBottleN; i++) {
-		bottles.push(new Bottle(0, 'Bottle'))
-	}
-	return bottles
+	return loadKinds().then(kinds => {
+		// Pick a Kind randomly
+		const kind = kinds[Math.floor(Math.random() * kinds.length)]
+		return {
+			title: kind.title,
+			bottles: kind.names.slice(0, InitBottleN).map(name => new Bottle(0, name)),
+		}
+	})
 }
 
 function App() {
-	const [bottles, setBottles] = useState<Bottle[]>(initBottles())
+	const [bottles, setBottles] = useState<Bottle[]>([])
 	const [title, setTitle] = useState<string>(defaultTitle)
 	const bottlesEl = useRef<HTMLDivElement | null>(null)
 	const [postURL, setPostURL] = useState<string | null>(null)
@@ -41,8 +45,15 @@ function App() {
 		setTitle(newTitle)
 	}
 	function readme() {
-		alert('1. 点击瓶子改变水的容量; \r\n2. 点击文字(标题和瓶子文字)可以修改')
+		alert('1. 点击瓶子改变水的高度; \r\n2. 点击文字(标题和瓶子文字)可以修改')
 	}
+	useEffect(() => {
+		initBottles().then(res => {
+			setBottles(res.bottles)
+			setTitle(res.title)
+		})
+	}, [])
+
 	return (
 		<div className='App'>
 			<div className={`post ${postURL ? 'post-show' : 'post-hidden'}`}>
