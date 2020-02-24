@@ -11,8 +11,9 @@
 }
 
 .container {
-  /* margin: 0 auto; */
+  margin: 0 auto;
   max-width: 400px;
+  position: relative;
   background: #f4fdfd;
 }
 
@@ -22,4 +23,79 @@
   font-size: 24px;
   padding: 10px 0;
   color: #54d0db;
+}
+
+.QR {
+  text-align: center;
+}
+
+.QR .tip {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.QR img {
+  width: 60px;
+  height: 60px;
+}
+
+.post-show {
+  opacity: 1;
+}
+
+.post-hidden {
+  opacity: 0;
+}
+
+.post {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  transition: opacity .5s;
+  z-index: 999;
+  border: 2px solid black;
+}
+
+button.again {
+  position: absolute;
+  bottom: 20px;
+  left: 100px;
+  font-weight: 500;
+  background: #FF7043;
+}
+
+.post img {
+  width: 100%;
+}
+
+.tools {
+  padding: 5px 0;
+  text-align: center;
+}
+
+button {
+  padding: 15px 30px;
+  margin: 5px 2px;
+  color: white;
+  cursor: pointer;
+  border: none;
+  transition: background 0.15s ease;
+  -webkit-tap-highlight-color: rgba( 0, 0, 0, 0 );
+  outline: none;
+}
+
+button.save {
+  background-color: #FBC02D;
+}
+
+button.delete{
+  background-color: #F44336;
+}
+
+button.add {
+  background-color: #29B6F6;
+}
+
+button.readme {
+  background-color: #66BB6A;
 }
