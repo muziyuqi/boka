@@ -3,6 +3,7 @@ import BottleComponent, { Bottle } from './Bottle'
 import { InitBottleN, defaultTitle } from './constans'
 import html2canvas from 'html2canvas'
 import QRCodeImage from './assets/images/QR.png'
+import GitHubButton from 'react-github-btn'
 import './App.css'
 import { loadKinds } from './utils'
 
@@ -22,6 +23,7 @@ function App() {
 	const [title, setTitle] = useState<string>(defaultTitle)
 	const bottlesEl = useRef<HTMLDivElement | null>(null)
 	const [postURL, setPostURL] = useState<string | null>(null)
+	const [loading, setLoading] = useState<boolean>(true)
 	function insertBottle() {
 		const newBottle = new Bottle(0, '新瓶子')
 		setBottles([...bottles, newBottle])
@@ -51,9 +53,12 @@ function App() {
 		initBottles().then(res => {
 			setBottles(res.bottles)
 			setTitle(res.title)
+			setLoading(false)
 		})
 	}, [])
-
+	if (bottles.length === 0 && loading) {
+		return <div>小瓶子们正在加载中...</div>
+	}
 	return (
 		<div className='App'>
 			<div className={`post ${postURL ? 'post-show' : 'post-hidden'}`}>
@@ -91,6 +96,17 @@ function App() {
 							<span className='tip'>扫码生成小瓶子→</span>
 							<img src={QRCodeImage} alt='QRCODE' />
 						</div>
+					</div>
+					<div className='star'>
+						<GitHubButton
+							href='https://github.com/dcalsky/boka'
+							data-icon='octicon-star'
+							data-size='large'
+							data-show-count={true}
+							aria-label='Star dcalsky/boka on GitHub'
+						>
+							Star
+						</GitHubButton>
 					</div>
 				</div>
 			) : null}

@@ -7,7 +7,6 @@
   justify-content: center;
   display: flex;
   flex-wrap: wrap;
-
 }
 
 .container {
@@ -51,17 +50,18 @@
   position: relative;
   box-sizing: border-box;
   width: 100%;
-  transition: opacity .5s;
+  transition: opacity 0.5s;
   z-index: 999;
   border: 2px solid black;
 }
 
 button.again {
   position: absolute;
-  bottom: 20px;
-  left: 100px;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
   font-weight: 500;
-  background: #FF7043;
+  background: #ff7043;
 }
 
 .post img {
@@ -73,6 +73,10 @@ button.again {
   text-align: center;
 }
 
+.tools button {
+  font-size: 16px;
+}
+
 button {
   padding: 15px 30px;
   margin: 5px 2px;
@@ -80,22 +84,27 @@ button {
   cursor: pointer;
   border: none;
   transition: background 0.15s ease;
-  -webkit-tap-highlight-color: rgba( 0, 0, 0, 0 );
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   outline: none;
 }
 
 button.save {
-  background-color: #FBC02D;
+  background-color: #fbc02d;
 }
 
-button.delete{
-  background-color: #F44336;
+button.delete {
+  background-color: #f44336;
 }
 
 button.add {
-  background-color: #29B6F6;
+  background-color: #29b6f6;
 }
 
 button.readme {
-  background-color: #66BB6A;
+  background-color: #66bb6a;
+}
+
+.star {
+  padding: 10px 0;
+  text-align: center;
 }
