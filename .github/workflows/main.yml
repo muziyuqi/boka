@@ -25,7 +25,7 @@ jobs:
         endpoint: ${{ secrets.OSS_ENDPOINT }}
         access-key-id: ${{ secrets.OSS_ID }}
         access-key-secret: ${{ secrets.OSS_KEY }}
-    - run: ossutil cp -rf build/ oss://boka/static
+    - run: ossutil cp -rf build/ oss://selfie/static/boka
     - name: Build and Publish docker image to Registry
       uses: HurricanKai/Publish-Docker-Github-Action@master
       with:
