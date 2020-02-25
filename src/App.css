@@ -74,12 +74,12 @@ button.again {
 }
 
 .tools button {
-  font-size: 16px;
+  font-size: 15px;
 }
 
 button {
-  padding: 15px 30px;
-  margin: 5px 2px;
+  padding: 12px 26px;
+  margin: 4px 2px;
   color: white;
   cursor: pointer;
   border: none;
@@ -102,6 +102,10 @@ button.add {
 
 button.readme {
   background-color: #66bb6a;
+}
+
+button.change {
+  background-color: #BA68C8;
 }
 
 .star {

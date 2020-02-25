@@ -5,7 +5,7 @@ import html2canvas from 'html2canvas'
 import QRCodeImage from './assets/images/QR.png'
 import GitHubButton from 'react-github-btn'
 import './App.css'
-import { loadKinds, prefetchBottleImages } from './utils'
+import { loadKinds, prefetchBottleImages, Kind } from './utils'
 
 function initBottles() {
 	return loadKinds().then(kinds => {
@@ -20,6 +20,7 @@ function initBottles() {
 
 function App() {
 	const [bottles, setBottles] = useState<Bottle[]>([])
+	const [kinds, setKinds] = useState<Kind[]>([])
 	const [title, setTitle] = useState<string>(defaultTitle)
 	const bottlesEl = useRef<HTMLDivElement | null>(null)
 	const [postURL, setPostURL] = useState<string | null>(null)
@@ -49,13 +50,18 @@ function App() {
 	function readme() {
 		alert('1. 点击瓶子改变水的高度; \r\n2. 点击文字(标题和瓶子文字)可以修改')
 	}
+	function switchBottle(kinds: Kind[]) {
+		const kind = kinds[Math.floor(Math.random() * kinds.length)]
+		setBottles(kind.names.slice(0, InitBottleN).map(name => new Bottle(0, name)))
+		setTitle(kind.title)
+	}
 	useEffect(() => {
-		initBottles().then(res => {
-			setBottles(res.bottles)
-			setTitle(res.title)
-			prefetchBottleImages().then(() => {
-				setLoading(false)
-			})
+		loadKinds().then(kinds => {
+			setKinds(kinds)
+			switchBottle(kinds)
+		})
+		prefetchBottleImages().then(() => {
+			setLoading(false)
 		})
 	}, [])
 	if (bottles.length === 0 && loading) {
@@ -73,13 +79,16 @@ function App() {
 				<div>
 					<div className='tools'>
 						<button className='readme' onClick={readme}>
-							使用说明
+							换文字
 						</button>
 						<button className='add' onClick={insertBottle}>
 							新建小瓶子
 						</button>
 						<button className='delete' onClick={deleteLastBottle}>
 							删除最后一个瓶子
+						</button>
+						<button className='change' onClick={() => switchBottle(kinds)}>
+							换一批小瓶子
 						</button>
 						<button className='save' onClick={generatePost}>
 							保存图片

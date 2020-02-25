@@ -3,7 +3,7 @@ import axios from 'axios'
 
 export const availableBottleVolumes = [0, 10, 30, 50, 70, 80, 100]
 
-interface Kind {
+export interface Kind {
 	title: string
 	names: string[]
 }
