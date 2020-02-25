@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
-import { loadBottleImage } from './utils'
+import { loadBottleImage, availableBottleVolumes } from './utils'
 import './Bottle.css'
-
-const availableVolumes = [0, 10, 30, 50, 70, 80, 100]
 
 export class Bottle {
 	volume: number = 0
@@ -23,7 +21,7 @@ const BottleComponent = (props: Bottle) => {
 		} else {
 			newVolume += 10
 		}
-		while (!availableVolumes.includes(newVolume)) {
+		while (!availableBottleVolumes.includes(newVolume)) {
 			newVolume += 10
 		}
 		setVolume(newVolume)

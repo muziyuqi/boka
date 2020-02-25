@@ -5,7 +5,7 @@ import html2canvas from 'html2canvas'
 import QRCodeImage from './assets/images/QR.png'
 import GitHubButton from 'react-github-btn'
 import './App.css'
-import { loadKinds } from './utils'
+import { loadKinds, prefetchBottleImages } from './utils'
 
 function initBottles() {
 	return loadKinds().then(kinds => {
@@ -53,7 +53,9 @@ function App() {
 		initBottles().then(res => {
 			setBottles(res.bottles)
 			setTitle(res.title)
-			setLoading(false)
+			prefetchBottleImages().then(() => {
+				setLoading(false)
+			})
 		})
 	}, [])
 	if (bottles.length === 0 && loading) {
