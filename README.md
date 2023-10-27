@@ -43,3 +43,22 @@ docker run -d -p 8900:80 --name boka-container boka
 
 
 注意修改：
+1. 执行：
+boka/.env.production
+PUBLIC_URL=https://bbq.noddl.me/static/boka
+为...我改的是PUBLIC_URL=/bottle/
+
+
+2.执行：
+nano .dockerignore
+修改为：
+.idea
+src/*
+!src/assets
+node_modules
+
+3. 修改/boka/src/constans.ts
+export const KindsURL = 'http://xxxxx:8900/assets/names.json'
+export const BottleImageURL = 'http://xxxxx:8900/assets/images'
+
+
